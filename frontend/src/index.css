@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:wght@100;300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.active hr{
+    @apply block
+}
+
+::-webkit-scrollbar{
+    @apply hidden
+}
+
+@media (max-width:740px) {
+    .active p{
+        @apply text-white bg-primary
+    }
+}
+
+h1, h2, h3, .title {
+    font-family: 'Prata', serif;
+}
+
+body, p, span, a, button {
+    font-family: 'Poppins', sans-serif;
+}   
