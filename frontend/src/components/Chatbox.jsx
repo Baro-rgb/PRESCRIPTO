@@ -3,6 +3,8 @@ import { io } from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+
 const Chatbox = () => {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
@@ -28,7 +30,7 @@ const Chatbox = () => {
           return;
         }
 
-        const response = await fetch('http://localhost:4000/api/user/get-profile', {
+        const response = await fetch(`${BACKEND_URL}/api/user/get-profile`, {
           method: 'GET',
           headers: {
             'token': token,
@@ -97,7 +99,7 @@ const Chatbox = () => {
 
     console.log("🔌 Setting up socket for user:", user.name);
     
-    const newSocket = io("http://localhost:4000", {
+    const newSocket = io(BACKEND_URL, {
       transports: ['websocket', 'polling'],
       auth: {
         token: localStorage.getItem('token'),
@@ -175,7 +177,7 @@ const Chatbox = () => {
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const response = await fetch('http://localhost:4000/api/user/chat-history', {
+      const response = await fetch(`${BACKEND_URL}/api/user/chat-history`, {
         method: 'GET',
         headers: {
           'token': token,
@@ -203,7 +205,7 @@ const Chatbox = () => {
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      await fetch('http://localhost:4000/api/user/mark-admin-messages-read', {
+      await fetch(`${BACKEND_URL}/api/user/mark-admin-messages-read`, {
         method: 'PUT',
         headers: {
           'token': token,
@@ -257,7 +259,7 @@ const Chatbox = () => {
 
       // 🔥 ĐỒNG THỜI GỬI QUA API ĐỂ LƯU VÀO DATABASE
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:4000/api/user/send-message", {
+      const response = await fetch(`${BACKEND_URL}/api/user/send-message`, {
         method: "POST",
         headers: {
           token,
